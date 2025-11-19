@@ -16,7 +16,7 @@ let data = [35, 68];
 let pie = d3.pie();
 
 let outerRadius = width / 2;
-let innerRadius = 0;
+let innerRadius = 90;
 
 let arc = d3.arc()
     .innerRadius(innerRadius)
@@ -32,6 +32,13 @@ arcs.enter()
         if (index === 0) {return('#00C4CB')}
         else {return('#42d342')}
     })
+pieChartGroup.append("circle").attr("cx",-35).attr("cy",-10).attr("r", 6).style("fill", '#42d342')
+pieChartGroup.append("circle").attr("cx",-35).attr("cy",10).attr("r", 6).style("fill", '#00C4CB')
+pieChartGroup.append("text").attr("x", -20).attr("y", -10).text("Rankings").style("font-size", "15px").attr("alignment-baseline","middle")
+pieChartGroup.append("text").attr("x", -20).attr("y", 10).text("Other").style("font-size", "15px").attr("alignment-baseline","middle")
+
+
+
 function download () {
     const svg_element = d3.select('#pie-chart').node();
     const serializer = new XMLSerializer();
