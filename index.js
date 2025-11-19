@@ -1,6 +1,6 @@
 
 let width = 300,
-    height = 500;
+    height = 300;
 let svg = d3.select("body").append("svg")
     .attr("width", width).attr("height", height)
     .attr('id', 'pie-chart')
@@ -9,14 +9,14 @@ let svg = d3.select("body").append("svg")
 let pieChartGroup = svg
     .append("g")
     .attr('class', 'pie-chart')
-    .attr('transform', "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr('transform', "translate(" + width/2 + "," + height / 2 + ")");
 
 let data = [35, 68];
 
 let pie = d3.pie();
 
 let outerRadius = width / 2;
-let innerRadius = 90;
+let innerRadius = 96.7;
 
 let arc = d3.arc()
     .innerRadius(innerRadius)
@@ -31,11 +31,11 @@ arcs.enter()
     .style("fill", function (d, index) {
         if (index === 0) {return('#00C4CB')}
         else {return('#42d342')}
-    })
-pieChartGroup.append("circle").attr("cx",-35).attr("cy",-10).attr("r", 6).style("fill", '#42d342')
-pieChartGroup.append("circle").attr("cx",-35).attr("cy",10).attr("r", 6).style("fill", '#00C4CB')
-pieChartGroup.append("text").attr("x", -20).attr("y", -10).text("Rankings").style("font-size", "15px").attr("alignment-baseline","middle")
-pieChartGroup.append("text").attr("x", -20).attr("y", 10).text("Other").style("font-size", "15px").attr("alignment-baseline","middle")
+    });
+pieChartGroup.append("circle").attr("cx",-35).attr("cy",-10).attr("r", 6).style("fill", '#42d342');
+pieChartGroup.append("circle").attr("cx",-35).attr("cy",10).attr("r", 6).style("fill", '#00C4CB');
+pieChartGroup.append("text").attr("x", -20).attr("y", -10).text("Rankings").style("font-size", "15px").attr("alignment-baseline","middle");
+pieChartGroup.append("text").attr("x", -20).attr("y", 10).text("Other").style("font-size", "15px").attr("alignment-baseline","middle");
 
 
 
