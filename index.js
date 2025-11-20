@@ -39,8 +39,8 @@ arcs.enter()
     });
 pieChartGroup.append("circle").attr("cx",-35).attr("cy",-10).attr("r", 6).style("fill", '#42d342');
 pieChartGroup.append("circle").attr("cx",-35).attr("cy",10).attr("r", 6).style("fill", '#00C4CB');
-pieChartGroup.append("text").attr("x", -20).attr("y", -10).text("Rankings").style("font-size", "15px").attr("alignment-baseline","middle");
-pieChartGroup.append("text").attr("x", -20).attr("y", 10).text("Other").style("font-size", "15px").attr("alignment-baseline","middle");
+pieChartGroup.append("text").attr("x", -20).attr("y", -10).text("Rankings").style("font-size", "15px").style('fill', "#F3F7FA").attr("alignment-baseline","middle");
+pieChartGroup.append("text").attr("x", -20).attr("y", 10).text("Other").style("font-size", "15px").style('fill', "#F3F7FA").attr("alignment-baseline","middle");
 
 
 
