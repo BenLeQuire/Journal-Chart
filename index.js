@@ -1,22 +1,27 @@
 
 let width = 300,
-    height = 500;
-let svg = d3.select("body").append("svg")
+    height = 300;
+let svgRoot = d3.select("body").append("svg")
+    .attr("xmlns", "http://www.w3.org/2000/svg")
     .attr("width", width).attr("height", height)
+    .attr("viewBox", `0 0 ${width} ${height}`)
     .attr('id', 'pie-chart')
+
+let svg = svgRoot.append("g")
+
     .append("g");
 
 let pieChartGroup = svg
     .append("g")
     .attr('class', 'pie-chart')
-    .attr('transform', "translate(" + width / 2 + "," + height / 2 + ")");
+    .attr('transform', "translate(" + width/2 + "," + height / 2 + ")");
 
-let data = [35, 68];
+let data = [10, 13];
 
 let pie = d3.pie();
 
 let outerRadius = width / 2;
-let innerRadius = 90;
+let innerRadius = 96.7;
 
 let arc = d3.arc()
     .innerRadius(innerRadius)
@@ -31,11 +36,11 @@ arcs.enter()
     .style("fill", function (d, index) {
         if (index === 0) {return('#00C4CB')}
         else {return('#42d342')}
-    })
-pieChartGroup.append("circle").attr("cx",-35).attr("cy",-10).attr("r", 6).style("fill", '#42d342')
-pieChartGroup.append("circle").attr("cx",-35).attr("cy",10).attr("r", 6).style("fill", '#00C4CB')
-pieChartGroup.append("text").attr("x", -20).attr("y", -10).text("Rankings").style("font-size", "15px").attr("alignment-baseline","middle")
-pieChartGroup.append("text").attr("x", -20).attr("y", 10).text("Other").style("font-size", "15px").attr("alignment-baseline","middle")
+    });
+pieChartGroup.append("circle").attr("cx",-35).attr("cy",-10).attr("r", 6).style("fill", '#42d342');
+pieChartGroup.append("circle").attr("cx",-35).attr("cy",10).attr("r", 6).style("fill", '#00C4CB');
+pieChartGroup.append("text").attr("x", -20).attr("y", -10).text("Rankings").style("font-size", "15px").style('fill', "#F3F7FA").attr("alignment-baseline","middle");
+pieChartGroup.append("text").attr("x", -20).attr("y", 10).text("Other").style("font-size", "15px").style('fill', "#F3F7FA").attr("alignment-baseline","middle");
 
 
 
@@ -44,15 +49,21 @@ function download () {
     const serializer = new XMLSerializer();
     let svgString = serializer.serializeToString(svg_element);
 
-    const downloadLink = document.createElement("a");
-    console.log(downloadLink);
+    if (!svgString.startsWith("<?xml")) {
+        svgString = '<?xml version="1.0" encoding="UTF-8"?>\n' + svgString;
+    }
 
-    downloadLink.href = 'data:image/svg+xml;base64,' + btoa(svgString);
+    const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = url;
     downloadLink.download = 'pie-chart.svg'; // Customize the filename
 
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(url);
 
 
 }
